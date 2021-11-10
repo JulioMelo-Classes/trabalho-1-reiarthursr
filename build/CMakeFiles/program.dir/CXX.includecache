@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Forca.hpp
+iostream
+-
+vector
+-
+string
+-
+
+/mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/main.cpp
+Forca.hpp
+/mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/Forca.hpp
+
