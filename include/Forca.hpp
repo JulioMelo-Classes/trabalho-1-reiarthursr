@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
  
 class Forca {
     public:
@@ -100,5 +101,11 @@ class Forca {
          * @return a quantidade de tentativas restantes.
          */
         int get_tentativas_restantes();
- 
+
+        //lembrar de arrumar comentário!!
+        std::vector<std::string> dividir_linha(std::string linha, char delimiter);
+
+        //lembrar de arrumar comentário!!
+        bool isNumber(const std::string& str);
+
 };
