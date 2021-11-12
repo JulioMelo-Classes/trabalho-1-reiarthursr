@@ -2,14 +2,24 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <ctime>
  
 class Forca {
     public:
         enum Dificuldade{
             FACIL, MEDIO, DIFICIL
         };
+
+        struct SCORE
+        {
+            std::string dificuldade;
+            std::string nome;
+            std::vector<std::string> palavras_acertadas;
+            int pontuacao;
+        };//score!
     private:
         //TODO: armazenar os scores?
+        std::vector<SCORE> m_scores; //<! scores dos jogadores!
        
         std::vector< std::pair<std::string, int> > m_palavras; //<! palavras e sua ocorrência no Corpus
  
@@ -22,6 +32,10 @@ class Forca {
         std::string m_palavra_atual; //<! palavra sendo testada atualmente
  
         int m_tentativas_restantes = 6; //<! tentativas restantes
+
+        int m_cont_medio = 2; //<! contador de partidas para dificuldade média!
+
+        int m_frequencia_media; //<! frequência média das palavras
    
     public:
         /**
@@ -101,6 +115,12 @@ class Forca {
          * @return a quantidade de tentativas restantes.
          */
         int get_tentativas_restantes();
+
+        //lembrar de arrumar comentário!!
+        void imprimir_scores();
+
+        //lembrar de arrumar comentário!!
+        void calc_frequencia_media();
 
         //lembrar de arrumar comentário!!
         std::vector<std::string> dividir_linha(std::string linha, char delimiter);

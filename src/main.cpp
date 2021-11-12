@@ -19,8 +19,13 @@ int main(int argc, char *argv[]){
         return EXIT_FAILURE;//fechando o programa
     }
 
+    //gerando semente
+    auto seed = time(0);
+    srand(seed);
+
     while(true)
     {
+        forca.carrega_arquivos();//carregar os arquivos
         int opcao;//opção escolhida pelo jogador
 
         //tela inicial!
@@ -41,6 +46,8 @@ int main(int argc, char *argv[]){
             else if(opcao==2)//ver scores anteriores
             {
                 //fazer tela de scores-----------------------------------------------------------------------
+                forca.imprimir_scores();
+
                 cout<<"Digite '1' para retornar a tela inicial."<<endl;
                 while(cin>>opcao)
                     if(opcao==1) break;
@@ -55,7 +62,13 @@ int main(int argc, char *argv[]){
         "Sua escolha: ";
         while (cin>>opcao)
         {
-            if(opcao==1 || opcao==2 || opcao==3) break;
+            if(opcao>=1 && opcao<=3)//setando dificuldade
+            {
+                if(opcao==1) forca.set_dificuldade(Forca::Dificuldade::FACIL);
+                else if(opcao==2) forca.set_dificuldade(Forca::Dificuldade::MEDIO);
+                else forca.set_dificuldade(Forca::Dificuldade::DIFICIL);
+                break;
+            }
             else cout<<"Opção inválida. Digite uma das opções acima."<<endl<<
             "Sua escolha: ";
         }

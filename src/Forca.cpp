@@ -9,6 +9,7 @@ Forca::Forca( std::string palavras, std::string scores )
 std::pair<bool, std::string> Forca::eh_valido()
 {
     std::string linha;//linha lida pelo arquivo
+    std::vector<std::string> linhas;
     std::vector<std::string> var_linha;//variáveis que estão na linha
     std::pair<bool, std::string> retorno = {true, ""};
 
@@ -16,9 +17,14 @@ std::pair<bool, std::string> Forca::eh_valido()
     std::ifstream arquivo_pala;
     arquivo_pala.open(m_arquivo_palavras);
     if(arquivo_pala.is_open())
+    {
         while (getline(arquivo_pala, linha))
+            linhas.push_back(linha);
+        for (size_t i = 0; i < linhas.size(); i++)
         {
-            linha.erase(linha.size()-1);
+            linha = linhas[i];
+
+            if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, '	');//dividindo linha
 
             if (var_linha[0].find_first_not_of("abcçdefghijklmnopqrstuvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ-")
@@ -52,18 +58,26 @@ std::pair<bool, std::string> Forca::eh_valido()
                 break;
             }
         }
+    }
     else retorno={false, "Arquivo de palavras não abriu: "+m_arquivo_palavras};
 
     arquivo_pala.close();//fechar arquivo
     if(!retorno.first) return retorno;//se der erro, retorna erro
 
+    linhas.clear();
+
     //abrindo arquivo de scores
     std::ifstream arquivo_sco;
     arquivo_sco.open(m_arquivo_scores);
     if(arquivo_sco.is_open())
+    {
         while (getline(arquivo_sco, linha))
+            linhas.push_back(linha);
+        for (size_t i = 0; i < linhas.size(); i++)
         {
-            linha.erase(linha.size()-1);
+            linha = linhas[i];
+
+            if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, ';');//dividindo linha
 
             if(var_linha.size()<4)
@@ -96,6 +110,7 @@ std::pair<bool, std::string> Forca::eh_valido()
                 break;
             }
         }
+    }
     else return {false, "Arquivo de scores não abriu: "+m_arquivo_scores};
 
     arquivo_sco.close();//fechar arquivo
@@ -106,43 +121,148 @@ std::pair<bool, std::string> Forca::eh_valido()
 
 void Forca::carrega_arquivos()
 {
+    std::string linha;//linha lida pelo arquivo
+    std::vector<std::string> linhas;
+    std::vector<std::string> var_linha;//variáveis que estão na linha
+    std::pair<bool, std::string> retorno = {true, ""};
 
+    //abrindo arquivo de palavras
+    std::ifstream arquivo_pala;
+    arquivo_pala.open(m_arquivo_palavras);
+    if(arquivo_pala.is_open())
+    {
+        while (getline(arquivo_pala, linha))
+            linhas.push_back(linha);
+        for (size_t i = 0; i < linhas.size(); i++)
+        {
+            linha = linhas[i];
+
+            if(i < linhas.size()-1) linha.erase(linha.size()-1);
+            var_linha = dividir_linha(linha, '	');//dividindo linha
+
+            m_palavras.push_back({ var_linha[0], stoi(var_linha[1]) });//armazenando no vetor de palavras
+        }
+    }
+    else std::cout<<"Erro ao abrir arquivo de palavras["<<m_arquivo_palavras<<"]"<<std::endl;
+    arquivo_pala.close();//fechar arquivo
+
+    linhas.clear();
+
+    //abrindo arquivo de scores
+    SCORE score;//armazenar um score temporariamente
+    std::ifstream arquivo_sco;
+    arquivo_sco.open(m_arquivo_scores);
+
+    if(arquivo_sco.is_open())
+    {
+        while (getline(arquivo_sco, linha))
+            linhas.push_back(linha);
+        for (size_t i = 0; i < linhas.size(); i++)
+        {
+            linha = linhas[i];
+
+            if(i < linhas.size()-1) linha.erase(linha.size()-1);
+            var_linha = dividir_linha(linha, ';');//dividindo linha
+
+            score.dificuldade = var_linha[0];
+            score.nome = var_linha[1];
+            score.palavras_acertadas = dividir_linha(var_linha[2], ',');
+            score.pontuacao = stoi(var_linha[3]);
+
+            m_scores.push_back(score);//armazenando no vetor
+        }
+    }
+    else std::cout<<"Erro ao abrir arquivo de scores["<<m_arquivo_scores<<"]"<<std::endl;
+    arquivo_sco.close();//fechar arquivo
+
+    calc_frequencia_media();
+    //criar sub-vetores de palavras
 }
 
 void Forca::set_dificuldade(Forca::Dificuldade d)
 {
-
+    this->d = d;
 }
 
 std::string Forca::proxima_palavra()
 {
+    switch (d)
+    {
+    case FACIL:
+        /* code */
+        break;
+
+    case MEDIO:
+        /* code */
+        break;
+
+    case DIFICIL:
+        /* code */
+        break;
+    
+    default:
+        std::cout<<"Erro: Dificuldade inválida"<<std::endl;
+        return "";
+        break;
+    }
     return "";
 }
 
 std::string Forca::get_palavra_atual()
 {
-    return "";
+    return m_palavra_atual;
 }
-
 
 bool Forca::palpite(std::string palpite)
 {
-    return false;
+    if(m_palavra_atual.find_first_of(palpite) != std::string::npos)//se pertencer
+        return true;
+    else
+    {
+        m_tentativas_restantes--;
+        return false;
+    }
 }
 
 bool Forca::game_over()
 {
-    return false;
+    if(m_tentativas_restantes <= 0) return true;//acabou as tentativas
+    else return false;//ainda possui tentativas
 }
 
 void Forca::set_tentativas_restantes(int tentativas)
 {
-
+    m_tentativas_restantes = tentativas;
 }
 
 int Forca::get_tentativas_restantes()
 {
-    return 0;
+    return m_tentativas_restantes;
+}
+
+void Forca::imprimir_scores()
+{
+    for (auto it = m_scores.begin(); it != m_scores.end(); it++)
+    {
+        std::cout<<"Jogador: ["<<it->nome<<"] Dificuldade: ["<<it->dificuldade<<
+        "] Pontuação: ["<<it->pontuacao<<"]"<<std::endl<<"Palavras acertadas: [";
+        for (auto it2=it->palavras_acertadas.begin(); it2!=it->palavras_acertadas.end(); it2++)
+        {
+            std::cout<<*it2;
+            if(it2 != it->palavras_acertadas.end()-1) std::cout<<", ";
+        }
+        std::cout<<"]"<<std::endl<<
+        "--------------------------------------------------------------------"<<std::endl;
+    }
+}
+
+void Forca::calc_frequencia_media()
+{
+    size_t soma_frequencia=0;//soma das frequências
+    for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)//soma todas as frequências
+        soma_frequencia += it->second;//soma uma frequência ao total
+
+    m_frequencia_media = soma_frequencia/m_palavras.size();//calculando frequência média
 }
 
 std::vector<std::string> Forca::dividir_linha(std::string linha, char delimiter)
