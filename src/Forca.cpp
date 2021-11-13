@@ -176,7 +176,6 @@ void Forca::carrega_arquivos()
     arquivo_sco.close();//fechar arquivo
 
     calc_frequencia_media();
-    //criar sub-vetores de palavras
 }
 
 void Forca::set_dificuldade(Forca::Dificuldade d)
@@ -186,18 +185,42 @@ void Forca::set_dificuldade(Forca::Dificuldade d)
 
 std::string Forca::proxima_palavra()
 {
+    std::vector< std::pair<std::string, int> > sub_vetor_palavras;//guarda as palavras usadas na dificuldade
     switch (d)
     {
     case FACIL:
-        /* code */
+        //preenchendo sub-vetor de palavras (frequência maior ou igual)
+        for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)
+            if(it->second >= m_frequencia_media)
+                sub_vetor_palavras.push_back(*it);
+        //sortear consoantes------------------------------------------------------------------------------------
         break;
 
     case MEDIO:
-        /* code */
+        if(m_cont_medio)
+        {
+            m_cont_medio--;
+            //preenchendo sub-vetor de palavras (qualquer frequência)
+            for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)
+                sub_vetor_palavras.push_back(*it);
+        }
+        else
+        {
+            m_cont_medio = 2;//resetar o contador
+            //preenchendo sub-vetor de palavras (frequência menor)
+            for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)
+                if(it->second < m_frequencia_media)
+                    sub_vetor_palavras.push_back(*it);
+        }
+        //sortear vogal------------------------------------------------------------------------------------
         break;
 
     case DIFICIL:
-        /* code */
+        //preenchendo sub-vetor de palavras (frequência menor)
+        for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)
+            if(it->second < m_frequencia_media)
+                sub_vetor_palavras.push_back(*it);
+
         break;
     
     default:
@@ -205,7 +228,21 @@ std::string Forca::proxima_palavra()
         return "";
         break;
     }
-    return "";
+
+    if(sub_vetor_palavras.size() <= 0)//se não tem mais palavras
+        return "";//termina o jogo. arrumar---------------------------------------------------------------------
+
+    //seta a palavra atual
+    m_palavra_atual = sub_vetor_palavras[rand()%sub_vetor_palavras.size()].first;
+
+    std::string retorno={};//retorna "_ _ _ _ ... _"
+    for (size_t i = 0; i < m_palavra_atual.size(); i++)
+    {
+        retorno += '_';
+        if(i < m_palavra_atual.size()-1) retorno += ' ';
+    }
+
+    return retorno;
 }
 
 std::string Forca::get_palavra_atual()
