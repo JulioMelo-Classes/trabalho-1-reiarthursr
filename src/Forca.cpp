@@ -140,6 +140,9 @@ void Forca::carrega_arquivos()
             if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, '	');//dividindo linha
 
+            std::transform(var_linha[0].begin(), var_linha[0].end(), var_linha[0].begin(),
+                [](unsigned char c){ return toupper(c); });//deixar palavra em maiúsculo
+
             m_palavras.push_back({ var_linha[0], stoi(var_linha[1]) });//armazenando no vetor de palavras
         }
     }
@@ -176,6 +179,7 @@ void Forca::carrega_arquivos()
     arquivo_sco.close();//fechar arquivo
 
     calc_frequencia_media();
+    m_palavras_acertadas.clear();//limpar vetor de palavras acertadas
 }
 
 void Forca::set_dificuldade(Forca::Dificuldade d)
@@ -186,6 +190,7 @@ void Forca::set_dificuldade(Forca::Dificuldade d)
 std::string Forca::proxima_palavra()
 {
     std::vector< std::pair<std::string, int> > sub_vetor_palavras;//guarda as palavras usadas na dificuldade
+
     switch (d)
     {
     case FACIL:
@@ -193,7 +198,7 @@ std::string Forca::proxima_palavra()
         for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)
             if(it->second >= m_frequencia_media)
                 sub_vetor_palavras.push_back(*it);
-        //sortear consoantes------------------------------------------------------------------------------------
+        
         break;
 
     case MEDIO:
@@ -212,7 +217,7 @@ std::string Forca::proxima_palavra()
                 if(it->second < m_frequencia_media)
                     sub_vetor_palavras.push_back(*it);
         }
-        //sortear vogal------------------------------------------------------------------------------------
+
         break;
 
     case DIFICIL:
@@ -230,17 +235,53 @@ std::string Forca::proxima_palavra()
     }
 
     if(sub_vetor_palavras.size() <= 0)//se não tem mais palavras
-        return "";//termina o jogo. arrumar---------------------------------------------------------------------
+        return "";//termina o jogo
 
     //seta a palavra atual
     m_palavra_atual = sub_vetor_palavras[rand()%sub_vetor_palavras.size()].first;
-
+std::cout<<"["<<m_palavra_atual<<"]"<<std::endl;
+    //removendo palavra atual do vetor de palavras
+    for (auto it = m_palavras.begin(); it != m_palavras.end(); it++)
+        if(it->first == m_palavra_atual)
+        {
+            m_palavras.erase(it);
+            break;
+        }
+    
     std::string retorno={};//retorna "_ _ _ _ ... _"
     for (size_t i = 0; i < m_palavra_atual.size(); i++)
     {
         retorno += '_';
         if(i < m_palavra_atual.size()-1) retorno += ' ';
     }
+
+    //revelar uma letra
+    char letra_revelada = '*';//letra que será sorteada para ser revelada
+    if(d==FACIL)//sortear consoante
+    {
+        std::vector<char> consoantes;//consoantes da palavra
+        for (auto it = m_palavra_atual.begin(); it != m_palavra_atual.end(); it++)
+            if(*it!='a' && *it!='e' && *it!='i' && *it!='o' && *it!='u' && *it!='-' &&
+            *it!='A' && *it!='E' && *it!='I' && *it!='O' && *it!='U')
+                consoantes.push_back(*it);
+        
+        if(consoantes.size())//se tiver consoantes
+            letra_revelada = consoantes[rand()%consoantes.size()];//escolhando consoante aleatoriamente
+    }
+    else if(d==MEDIO)//sortear vogal
+    {
+        std::vector<char> vogais;//vogais da palavra
+        for (auto it = m_palavra_atual.begin(); it != m_palavra_atual.end(); it++)
+            if(*it=='a' || *it=='e' || *it=='i' || *it=='o' || *it=='u' ||
+            *it=='A' || *it=='E' || *it=='I' || *it=='O' || *it=='U')
+                vogais.push_back(*it);
+        
+        if(vogais.size())//se tiver vogais
+            letra_revelada = vogais[rand()%vogais.size()];//escolhando vogal aleatoriamente
+    }
+
+    if(letra_revelada != '*')
+        adicionar_letra(&retorno, {letra_revelada});//adicionando a letra revelada
 
     return retorno;
 }
@@ -300,6 +341,67 @@ void Forca::calc_frequencia_media()
         soma_frequencia += it->second;//soma uma frequência ao total
 
     m_frequencia_media = soma_frequencia/m_palavras.size();//calculando frequência média
+}
+
+void Forca::imprimir_boneco()
+{
+    std::vector<std::string> boneco = {" o \n",
+    "/", "|", "\\ \n",
+    "/ ", "\\ \n\n"};
+    std::vector<std::string> nao_boneco = {"\n", "", "", "\n", "", "\n\n"};
+
+    //imprimindo boneco
+    for (int i = 0; i < 6; i++)
+    {
+        if(m_tentativas_restantes >= 6-i) std::cout<<nao_boneco[i];
+        else std::cout<<boneco[i];
+    }
+    
+}
+
+void Forca::salvar_score(std::string nome, int pontos)
+{
+    //abrindo arquivo de scores
+    std::ofstream arquivo;
+    arquivo.open(m_arquivo_scores, std::ios::app);
+
+    std::string dificuldade;
+    if(d==FACIL) dificuldade = "Fácil";
+    else if(d==MEDIO) dificuldade = "Médio";
+    else if(d==DIFICIL) dificuldade = "Difícil";
+
+    arquivo<<std::endl<<dificuldade<<"; "<<nome<<"; ";
+    for (auto it=m_palavras_acertadas.begin(); it!=m_palavras_acertadas.end(); it++)
+    {
+        arquivo<<*it;
+        if(it != m_palavras_acertadas.end()-1) arquivo<<", ";
+    }
+    arquivo<<"; "<<pontos;
+    
+    arquivo.close();//fechar arquivo
+}
+
+int Forca::adicionar_letra(std::string* palavra_incompleta, char letra)
+{
+    int pontos=0;
+    for (size_t i = 0; i < m_palavra_atual.size(); i++)
+        if(m_palavra_atual[i] == letra)
+        {
+            (*palavra_incompleta)[i*2] = letra;
+            pontos++;
+        }
+    
+    return pontos;
+}
+
+void Forca::add_palavra_acertada()
+{
+    m_palavras_acertadas.push_back(m_palavra_atual);
+}
+
+void Forca::clear_palavras_acertadas()
+{
+    m_palavras_acertadas.clear();
 }
 
 std::vector<std::string> Forca::dividir_linha(std::string linha, char delimiter)

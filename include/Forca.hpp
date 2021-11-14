@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <ctime>
+#include <algorithm>
  
 class Forca {
     public:
@@ -20,6 +21,8 @@ class Forca {
     private:
         //TODO: armazenar os scores?
         std::vector<SCORE> m_scores; //<! scores dos jogadores!
+
+        std::vector<std::string> m_palavras_acertadas; //<! palavras que o jogador acertou!
        
         std::vector< std::pair<std::string, int> > m_palavras; //<! palavras e sua ocorrência no Corpus
  
@@ -116,11 +119,45 @@ class Forca {
          */
         int get_tentativas_restantes();
 
-        //lembrar de arrumar comentário!!
+        /**
+         * Este método imprime todos os scores dos jogadores na tela.
+         * É usado quando o jogador pede para ver os scores anteriores!
+         */
         void imprimir_scores();
 
-        //lembrar de arrumar comentário!!
+        /**
+         * Este método calcula e seta a frequancia_media!
+         */
         void calc_frequencia_media();
+
+        /**
+         * Este método imprime o boneco da forca com base nas m_tentivas_restantes.
+         * É usado na hora de imprimir a tela do jogo da forca!
+         */
+        void imprimir_boneco();
+
+        /**
+         * Este método salva o score do jogador atual no arquivo de scores.
+         * É usado assim que o jogo acaba!
+         * @param nome nome do jogador a ser salvo no arquivo de scores.
+         * @param pontos a pontuação que o jogador fez durante o jogo. também irá ser salvo no arquivo.
+         */
+        void salvar_score(std::string nome, int pontos);
+
+        //lembrar de arrumar comentário!!
+        int adicionar_letra(std::string* palavra_incompleta, char letra);
+
+        /**
+         * Este método adiciona a m_palavra_atual no vetor m_palavras_acertadas.
+         * É usado quando o jogador acerta a palavra atual!
+         */
+        void add_palavra_acertada();
+
+        /**
+         * Este método limpa o vetor m_palavras_acertadas.
+         * É útil quando necessário resetar o jogo!
+         */
+        void clear_palavras_acertadas();
 
         //lembrar de arrumar comentário!!
         std::vector<std::string> dividir_linha(std::string linha, char delimiter);
