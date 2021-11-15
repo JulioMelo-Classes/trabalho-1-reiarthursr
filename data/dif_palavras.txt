@@ -1,0 +1,4 @@
+teste-das-palavras-reveladas-facil	1000000
+palavra-colmum	1000001
+palavra-incomum	10
+outra-incomum	11

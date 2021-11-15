@@ -1,0 +1,3 @@
+Fácil; Certo; SEM, NENHUM, ERRO, AQUI; 10
+Difícil; Pontoacao; VAZIA; 
+Médio; Exato; ; 60

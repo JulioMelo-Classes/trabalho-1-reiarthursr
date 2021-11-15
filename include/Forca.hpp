@@ -5,8 +5,17 @@
 #include <ctime>
 #include <algorithm>
  
+//! A classe Forca.
+/*! É a classe onde se pode criar um jogo da forca.
+* \author Arthur Soares Ramalho.
+* \since 15/11/2021
+* \version 1.0
+*/
+
 class Forca {
     public:
+        //! Enumeração Dificuldade.
+        /*! indica a dificuldade do jogo */
         enum Dificuldade{
             FACIL, MEDIO, DIFICIL
         };
@@ -17,28 +26,27 @@ class Forca {
             std::string nome;
             std::vector<std::string> palavras_acertadas;
             int pontuacao;
-        };//score!
+        };//!< armazena um score!
     private:
-        //TODO: armazenar os scores?
-        std::vector<SCORE> m_scores; //<! scores dos jogadores!
+        std::vector<SCORE> m_scores; //!< scores dos jogadores!
 
-        std::vector<std::string> m_palavras_acertadas; //<! palavras que o jogador acertou!
+        std::vector<std::string> m_palavras_acertadas; //!< palavras que o jogador acertou!
        
-        std::vector< std::pair<std::string, int> > m_palavras; //<! palavras e sua ocorrência no Corpus
+        std::vector< std::pair<std::string, int> > m_palavras; //!< palavras e sua ocorrência no Corpus
  
-        std::string m_arquivo_scores; //<! nome do arquivo contendo os scores
+        std::string m_arquivo_scores; //!< nome do arquivo contendo os scores
  
-        std::string m_arquivo_palavras; //<! nome do arquivo contendo as palavras
+        std::string m_arquivo_palavras; //!< nome do arquivo contendo as palavras
  
-        Dificuldade d = Dificuldade::FACIL; //<! dificuldade do jogo
+        Dificuldade d = Dificuldade::FACIL; //!< dificuldade do jogo
  
-        std::string m_palavra_atual; //<! palavra sendo testada atualmente
+        std::string m_palavra_atual; //!< palavra sendo testada atualmente
  
-        int m_tentativas_restantes = 6; //<! tentativas restantes
+        int m_tentativas_restantes = 6; //!< tentativas restantes
 
-        int m_cont_medio = 2; //<! contador de partidas para dificuldade média!
+        int m_cont_medio = 2; //!< contador de partidas para dificuldade média!
 
-        int m_frequencia_media; //<! frequência média das palavras
+        int m_frequencia_media; //!< frequência média das palavras
    
     public:
         /**
@@ -144,7 +152,13 @@ class Forca {
          */
         void salvar_score(std::string nome, int pontos);
 
-        //lembrar de arrumar comentário!!
+        /**
+         * Este método serve para adicionar letras na string da palavra incompleta, retornando os pontos recebidos.
+         * É usado quando o jogador acerta algum palpite, calculando e retornando os pontos que ele ganhou!
+         * @param palavra_incompleta é a palavra a ser adicionado as letras.
+         * @param letra é a letra que será adicionado a palavra, somente nos espaços vazios "_".
+         * @return quantidadee de pontos ganhos, baseado na quantidade de letras adicionadas.
+         */
         int adicionar_letra(std::string* palavra_incompleta, char letra);
 
         /**
@@ -159,10 +173,21 @@ class Forca {
          */
         void clear_palavras_acertadas();
 
-        //lembrar de arrumar comentário!!
+        /**
+         * Este método serve para dividir uma linha em várias partes com base num delimitador.
+         * Serve para ler os arquivos de forma fácil, dividindo as variáves nescessárias!
+         * @param linha é a linha a ser dividida.
+         * @param delimiter é a divisão entre cada parte. ele não entrará em nenhuma das strings do retorno.
+         * @return retorna o vetor de string onde contem cada parte da string que foi dividida.
+         */
         std::vector<std::string> dividir_linha(std::string linha, char delimiter);
 
-        //lembrar de arrumar comentário!!
+        /**
+         * Este método serve para verificar se uma string é um número.
+         * É útil para verificar se algumas das variáveis contidas nos arquivos são váliddas ou não!
+         * @param str a string a ser verificada se é um número ou não.
+         * @return T se a string recebida for um número e F caso contrário.
+         */
         bool isNumber(const std::string& str);
 
 };
