@@ -6,5 +6,5 @@ CXX_FLAGS = -Wall   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/include 
+CXX_INCLUDES = -I/home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/include 
 

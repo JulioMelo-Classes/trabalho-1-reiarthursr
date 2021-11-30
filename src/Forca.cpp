@@ -24,7 +24,7 @@ std::pair<bool, std::string> Forca::eh_valido()
         {
             linha = linhas[i];
 
-            if(i < linhas.size()-1) linha.erase(linha.size()-1);
+          //  if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, '	');//! dividindo linha
 
             if (var_linha[0].find_first_not_of("abcçdefghijklmnopqrstuvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ-")
@@ -77,7 +77,7 @@ std::pair<bool, std::string> Forca::eh_valido()
         {
             linha = linhas[i];
 
-            if(i < linhas.size()-1) linha.erase(linha.size()-1);
+            //if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, ';');//! dividindo linha
 
             if(var_linha.size()<4)
@@ -137,12 +137,12 @@ void Forca::carrega_arquivos()
         {
             linha = linhas[i];
 
-            if(i < linhas.size()-1) linha.erase(linha.size()-1);
+            //if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, '	');//! dividindo linha
 
             std::transform(var_linha[0].begin(), var_linha[0].end(), var_linha[0].begin(),
                 [](unsigned char c){ return toupper(c); });//! deixar palavra em maiúsculo
-
+            std::cout << var_linha[0]<<","<< var_linha[1]<<std::endl;
             m_palavras.push_back({ var_linha[0], stoi(var_linha[1]) });//! armazenando no vetor de palavras
         }
     }
@@ -164,12 +164,13 @@ void Forca::carrega_arquivos()
         {
             linha = linhas[i];
 
-            if(i < linhas.size()-1) linha.erase(linha.size()-1);
+           // if(i < linhas.size()-1) linha.erase(linha.size()-1);
             var_linha = dividir_linha(linha, ';');//! dividindo linha
 
             score.dificuldade = var_linha[0];
             score.nome = var_linha[1];
             score.palavras_acertadas = dividir_linha(var_linha[2], ',');
+            std::cout << var_linha[3]<<std::endl;
             score.pontuacao = stoi(var_linha[3]);
 
             m_scores.push_back(score);//! armazenando no vetor

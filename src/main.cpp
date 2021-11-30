@@ -3,10 +3,11 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
-    Forca forca(argv[1], argv[2]);//!< criar forca
-
     cout<<">>> Lendo arquivos de palavras ["<<argv[1]<<"] e scores ["<<argv[2]<<"], por favor aguarde.."<<endl<<
     "--------------------------------------------------------------------"<<endl;
+    Forca forca(argv[1], argv[2]);//!< criar forca
+
+    
 
     //! validano arquivos
     auto validade = forca.eh_valido();

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr
+CMAKE_SOURCE_DIR = /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build
+CMAKE_BINARY_DIR = /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/program.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/program.dir/flags.make
 
 CMakeFiles/program.dir/src/main.cpp.o: CMakeFiles/program.dir/flags.make
 CMakeFiles/program.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/program.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/src/main.cpp.o -c /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/program.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/src/main.cpp.o -c /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/src/main.cpp
 
 CMakeFiles/program.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/main.cpp > CMakeFiles/program.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/src/main.cpp > CMakeFiles/program.dir/src/main.cpp.i
 
 CMakeFiles/program.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/main.cpp -o CMakeFiles/program.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/src/main.cpp -o CMakeFiles/program.dir/src/main.cpp.s
 
 CMakeFiles/program.dir/src/Forca.cpp.o: CMakeFiles/program.dir/flags.make
 CMakeFiles/program.dir/src/Forca.cpp.o: ../src/Forca.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/program.dir/src/Forca.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/src/Forca.cpp.o -c /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/Forca.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/program.dir/src/Forca.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/src/Forca.cpp.o -c /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/src/Forca.cpp
 
 CMakeFiles/program.dir/src/Forca.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/src/Forca.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/Forca.cpp > CMakeFiles/program.dir/src/Forca.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/src/Forca.cpp > CMakeFiles/program.dir/src/Forca.cpp.i
 
 CMakeFiles/program.dir/src/Forca.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/src/Forca.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/src/Forca.cpp -o CMakeFiles/program.dir/src/Forca.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/src/Forca.cpp -o CMakeFiles/program.dir/src/Forca.cpp.s
 
 # Object files for target program
 program_OBJECTS = \
@@ -95,7 +95,7 @@ program: CMakeFiles/program.dir/src/main.cpp.o
 program: CMakeFiles/program.dir/src/Forca.cpp.o
 program: CMakeFiles/program.dir/build.make
 program: CMakeFiles/program.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable program"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable program"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/program.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/program.dir/clean:
 .PHONY : CMakeFiles/program.dir/clean
 
 CMakeFiles/program.dir/depend:
-	cd /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build /mnt/c/Users/soare/Documents/GitHub/trabalho-1-reiarthursr/build/CMakeFiles/program.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build /home/julio/lp1/2021.2/trabalho1/trabalho-1-reiarthursr/build/CMakeFiles/program.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/program.dir/depend
 

@@ -36,3 +36,31 @@ Todos os testes de erro:
 ## Limitações e funcionalidades não implementadas
 
 O programa não possui nenhuma limitação de funcionalidade aparente e nem funcionalidades não implementadas.
+
+# Avaliação
+
+## Código | Funcionalidades
+1. Classe forca 10/10
+
+2. Interface textual 10/10
+
+3. Execução completa do jogo 13/15
+
+4. Validação dos arquivos de texto 5/5
+
+5. Arquivos de teste de validação dos casos de erro 5/5
+
+6. Arquivos de teste de validação dos níveis de dificuldade 5/5
+
+7. Observações gerais
+- Você poderia ter modularizado o main em funções ou criado outra classe para exibir
+a interface, ainda assim ficou muito bom o código.
+
+## Código | Boas práticas
+
+1. Documentação do código e readme 10/10
+
+2. Organização e indentação 5/10
+
+3. Compilação automatizada 5/5
+
